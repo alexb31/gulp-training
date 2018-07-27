@@ -11,5 +11,8 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-uglify": "^3.0.1"
+  },
+  "dependencies": {
+    "static-server": "^2.2.1"
   }
 }
