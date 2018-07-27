@@ -4,6 +4,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
 var concat = require('gulp-concat');
 var minifyCss = require('gulp-minify-css');
+var plumber = require('gulp-plumber');
 
 
 // File Path
@@ -16,6 +17,11 @@ var CSS_PATH = 'public/css/**/*.css';
 gulp.task('styles', function () {
     console.log('starting styles task');
     return gulp.src(['public/css/reset.css', CSS_PATH])
+        .pipe(plumber(function (err) {
+            console.log('Styles Task Error'); 
+            console.log(err);
+            this.emit('end');
+        }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
