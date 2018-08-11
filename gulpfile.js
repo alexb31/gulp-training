@@ -7,6 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
+var less = require('gulp-less');
 
 // File Path
 var DIST_PATH = 'public/dist';
@@ -37,6 +38,28 @@ var SCSS_PATH = 'public/scss/**/*.scss';
 // });
 
 // Styles for SCSS
+// gulp.task('styles', function () {
+//     console.log('starting styles task');
+//     return gulp.src(SCSS_PATH)
+//         .pipe(plumber(function (err) {
+//             console.log('Styles Task Error'); 
+//             console.log(err);
+//             this.emit('end');
+//         }))
+//         .pipe(sourcemaps.init())
+//         .pipe(autoprefixer({
+//             browsers: ['last 2 versions'],
+//             cascade: false
+//         }))
+//         .pipe(sass({
+//             outputStyle: 'compressed'
+//         }))
+//         .pipe(sourcemaps.write())
+//         .pipe(gulp.dest(DIST_PATH+'/css'))
+//         .pipe(livereload());
+// });
+
+// Styles for LESS
 gulp.task('styles', function () {
     console.log('starting styles task');
     return gulp.src(SCSS_PATH)
