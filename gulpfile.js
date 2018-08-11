@@ -7,13 +7,20 @@ var minifyCss = require('gulp-minify-css');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
+
+// LESS PLUGINS
 var less = require('gulp-less');
+var LessAutoPrefix = require('less-plugin-autoprefix');
+var lessAutoprefix = new LessAutoPrefix({
+    browsers: ['last 2 versions']
+});
 
 // File Path
 var DIST_PATH = 'public/dist';
 var SCRIPTS_PATH = 'public/scripts/**/*.js';
 var CSS_PATH = 'public/css/**/*.css';
 var SCSS_PATH = 'public/scss/**/*.scss';
+var LESS_PATH = 'public/less/**/*.less';
 
 
 // Styles
@@ -62,20 +69,17 @@ var SCSS_PATH = 'public/scss/**/*.scss';
 // Styles for LESS
 gulp.task('styles', function () {
     console.log('starting styles task');
-    return gulp.src(SCSS_PATH)
+    return gulp.src('public/less/styles.less')
         .pipe(plumber(function (err) {
             console.log('Styles Task Error'); 
             console.log(err);
             this.emit('end');
         }))
         .pipe(sourcemaps.init())
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
-            cascade: false
+        .pipe(less({
+            plugins: [lessAutoprefix]
         }))
-        .pipe(sass({
-            outputStyle: 'compressed'
-        }))
+        .pipe(minifyCss())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(DIST_PATH+'/css'))
         .pipe(livereload());
@@ -105,5 +109,6 @@ gulp.task('watch', function () {
     livereload.listen();
     gulp.watch(SCRIPTS_PATH, ['scripts'])
     // gulp.watch(CSS_PATH, ['styles'])
-    gulp.watch(SCSS_PATH, ['styles'])
+    // gulp.watch(SCSS_PATH, ['styles'])
+    gulp.watch(LESS_PATH, ['styles'])
 });

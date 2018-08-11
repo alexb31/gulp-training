@@ -19,7 +19,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
-    "less-plugin-autoprefix": "^2.0.0"
+    "less-plugin-autoprefix": "^1.5.1"
   },
   "dependencies": {
     "static-server": "^2.2.1"
