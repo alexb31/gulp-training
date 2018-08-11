@@ -1,2 +1,3 @@
-var name="Ken";document.write("Hello "+name+"!");
+var name="Guile";document.write("Hello "+name+"!");
 var max=10;for(i=0;i<max;i++)console.log(i);
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uanMiLCJzZWNvbmRhcnktc2NyaXB0cy5qcyJdLCJuYW1lcyI6WyJuYW1lIiwiZG9jdW1lbnQiLCJ3cml0ZSIsIm1heCIsImkiLCJjb25zb2xlIiwibG9nIl0sIm1hcHBpbmdzIjoiQUFBQSxJQUFJQSxLQUFPLFFBRVhDLFNBQVNDLE1BQU0sU0FBV0YsS0FBTztBQ0ZqQyxJQUFJRyxJQUFNLEdBRVYsSUFBS0MsRUFBSSxFQUFHQSxFQUFJRCxJQUFLQyxJQUNqQkMsUUFBUUMsSUFBSUYiLCJmaWxlIjoic2NyaXB0cy5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciBuYW1lID0gJ0d1aWxlJztcclxuXHJcbmRvY3VtZW50LndyaXRlKCdIZWxsbyAnICsgbmFtZSArICchJyk7IiwidmFyIG1heCA9IDEwO1xyXG5cclxuZm9yIChpID0gMDsgaSA8IG1heDsgaSsrKSB7XHJcbiAgICBjb25zb2xlLmxvZyhpKTtcclxufSJdfQ==
