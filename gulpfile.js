@@ -8,6 +8,8 @@ var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var babel = require('gulp-babel');
+var del = require('del');
+var zip = require('gulp-zip');
 
 // LESS PLUGINS
 var less = require('gulp-less');
@@ -22,6 +24,11 @@ var handlebarsLib = require('handlebars');
 var declare = require('gulp-declare');
 var wrap = require('gulp-wrap');
 
+// Image Compression
+var imagemin = require('gulp-imagemin');
+var imageminPngquant = require('imagemin-pngquant');
+var imageminJpegRecompress = require('imagemin-jpeg-recompress');
+
 // File Path
 var DIST_PATH = 'public/dist';
 var SCRIPTS_PATH = 'public/scripts/**/*.js';
@@ -29,6 +36,7 @@ var CSS_PATH = 'public/css/**/*.css';
 var SCSS_PATH = 'public/scss/**/*.scss';
 var LESS_PATH = 'public/less/**/*.less';
 var TEMPLATES_PATH = 'templates/**/*.hbs';
+var IMAGES_PATH = 'public/images/**/*.{png,jpeg,jpg,svg,gif}';
 
 
 // Styles
@@ -116,7 +124,18 @@ gulp.task('scripts', function() {
 
 // Images
 gulp.task('images', function() {
-    console.log('starting images task');
+    return gulp.src(IMAGES_PATH)
+    .pipe(imagemin(
+        [
+            imagemin.gifsicle(),
+            imagemin.jpegtran(),
+            imagemin.optipng(),
+            imagemin.svgo(),
+            imageminPngquant(),
+            imageminJpegRecompress()
+        ]
+    ))
+    .pipe(gulp.dest(DIST_PATH + '/images'));
 });
 
 gulp.task('templates', function () {
@@ -134,11 +153,23 @@ gulp.task('templates', function () {
     .pipe(livereload());
 });
 
-gulp.task('default', function() {
+gulp.task('clean', function () {
+    return del.sync([
+        DIST_PATH
+    ]);
+});
+
+gulp.task('default', ['clean', 'images', 'templates', 'styles', 'scripts'], function() {
     console.log('starting default');
 });
 
-gulp.task('watch', function () {
+gulp.task('export', function () {
+    return gulp.src('public/**/*')
+    .pipe(zip('website.zip'))
+    .pipe(gulp.dest('./'))
+})
+
+gulp.task('watch', ['default'], function () {
     require('./server.js');
     livereload.listen();
     gulp.watch(SCRIPTS_PATH, ['scripts'])
